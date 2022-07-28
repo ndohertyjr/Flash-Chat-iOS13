@@ -20,10 +20,10 @@ class LoginViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
                 if error != nil {
-                    let alert = UIAlertController(title: "Failed Login", message: "Login Failure. Try again.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    let alert = UIAlertController(title: Constants.loginFailureTitle, message: Constants.loginFailureMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Constants.alertAction, style: .default))
                 } else {
-                    self.performSegue(withIdentifier: "LoginToChat", sender: self)
+                    self.performSegue(withIdentifier: Constants.loginSegue, sender: self)
                 }
             }
         }

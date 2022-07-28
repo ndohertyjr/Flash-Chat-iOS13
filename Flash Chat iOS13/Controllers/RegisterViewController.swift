@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var emailTextfield: UITextField!
@@ -19,15 +20,15 @@ class RegisterViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
                 if error != nil {
-                    let alert = UIAlertController(title: "Registration Error", message: "Please enter an email and password.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default Action"), style: .default, handler: {_ in
+                    let alert = UIAlertController(title: Constants.registrationFailureTitle, message: Constants.registrationFailureMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString(Constants.alertAction, comment: "Default Action"), style: .default, handler: {_ in
                         print("Error occured during registration:")
                         print(error!)
                     }))
                     self.present(alert, animated: true, completion: nil)
                 } else {
                     //Navigate to chat view controller
-                    self.performSegue(withIdentifier: "RegisterToChat", sender: self)
+                    self.performSegue(withIdentifier: Constants.registerSegue, sender: self)
                 }
             }
         }
